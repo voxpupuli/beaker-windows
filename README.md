@@ -72,9 +72,9 @@ If the command throws an exception then it should exit with "1". (Default)
 
     on(hosts, exec_ps_cmd("does.not.exist", :excep_fail => true))
 
-### exec_ps_script_on(host, 'Write-Host Hello')
+### exec_ps_script_on
 
-Execute a PowerShell script on a remote machine. (This method support native
+Execute a PowerShell script on a remote machine. (This method supports native
 Unicode) Note: This method fails on Windows 2008 R2! See BKR-293 for more details.
 
 #### Example 1
