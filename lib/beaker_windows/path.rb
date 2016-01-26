@@ -30,7 +30,7 @@ module BeakerWindows
 
       combined_path = ''
 
-      # Verify that the user provided at least to paths to combine
+      # Verify that the user provided at least two paths to combine
       raise(ArgumentError, "Too few arguments") if args.length < 2
 
       # Combine the paths
