@@ -20,6 +20,7 @@ module BeakerWindows
     # +ArgumentError+ - Too few arguments.
     #
     # ==== Example
+    #
     # join_path('c:\meow', 'cats/', 'bats\')
     # join_path('c:\dog', 'bark', :strip_drive => true)
     def join_path(*args)
