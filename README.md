@@ -88,3 +88,76 @@ Can also be used in a block for granular verification.
     exec_ps_script_on(hosts, 'Write-Host Hello') do |result|
       assert_match(/Hello/, result.stdout)
     end
+
+### get_windows_features_on
+
+Get a list (returns an Array) of Windows features on a host. Allow for
+filtering of installed or available features.
+
+#### Example 1
+
+Get all features regardless of installation state.
+
+    get_windows_features_on(host)
+
+#### Example 2
+
+Filter for installed features.
+
+    get_windows_features_on(host, :filter => :installed)
+
+#### Example 3
+
+Filter for available features.
+
+    get_windows_features_on(host, :filter => :available)
+
+### install_windows_feature_on
+
+Install a Windows role or feature on a host.
+
+#### Example 1
+
+    install_windows_feature_on(host, 'Print-Server')
+
+#### Example 2
+
+Optionally failures can be suppressed which allows for delayed verification
+of feature installation. (See
+[assert_windows_feature_on](#assert_windows_feature_on) for more details.)
+
+    install_windows_feature_on(host, 'Bad-Feature', :suppress_fail => true)
+
+### remove_windows_feature_on
+
+Remove a Windows role or feature on a host.
+
+#### Example 1
+
+    remove_windows_feature_on(host, 'Print-Server')
+
+#### Example 2
+
+Optionally failures can be suppressed which allows for delayed verification
+of feature removal. (See
+[assert_windows_feature_on](#assert_windows_feature_on) for more details.)
+
+    remove_windows_feature_on(host, 'Bad-Feature', :suppress_fail => true)
+
+### assert_windows_feature_on
+
+Assert that a Windows feature is installed or not on a host. The advantage
+of this assert is that is will report as a Beaker test failure if the
+assertion fails.
+
+#### Example 1
+
+Assert that a Windows feature is installed.
+
+    assert_windows_feature_on(host, 'Print-Server')
+
+#### Example 2
+
+Assert that a Windows feature is available.
+
+    assert_windows_feature_on(host, 'WINS', :state => :available)
