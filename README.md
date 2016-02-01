@@ -161,3 +161,61 @@ Assert that a Windows feature is installed.
 Assert that a Windows feature is available.
 
     assert_windows_feature_on(host, 'WINS', :state => :available)
+
+### get_registry_value_on
+
+Get the data from a registry value.
+
+#### Example 1
+
+    get_registry_value_on(host, :hklm, "SOFTWARE\Microsoft\Windows NT\CurrentVersion", "SystemRoot")
+
+### set_registry_value_on
+
+Set the data for a registry value.
+
+#### Example 1
+
+Set data for a REG_SZ registry value.
+
+    set_registry_value_on(host, :hkcu, 'SOFTWARE\test_key', 'string_value', 'test_data')
+
+#### Example 2
+
+Set data for a REG_DWORD registry value.
+
+    set_registry_value_on(host, :hkcu, 'SOFTWARE\test_key', 'dword_value', 255, :dword)
+
+#### Example 3
+
+Set data for a REG_BINARY registry value.
+
+    set_registry_value_on(host, :hkcu, 'SOFTWARE\test_key', 'bin_value', 'be,ef,f0,0d', :bin)
+
+### remove_registry_value_on
+
+Remove a registry value.
+
+#### Example 1
+
+    remove_registry_value_on(host, :hkcu, 'SOFTWARE\test_key', 'string_value')
+
+### new_registry_key_on
+
+Create a new registry key. If the key already exists then this method will
+silently fail. This method will create parent intermediate parent keys if they
+do not exist.
+
+#### Example 1
+
+    new_registry_key_on(host, :hkcu, 'SOFTWARE\some_new_key')
+
+### remove_registry_key_on
+
+Remove a registry key. The method will not remove a registry key if the key contains
+nested subkeys and values. Use the "recurse" argument to force deletion of nested
+registry keys.
+
+#### Example 1
+
+    remove_registry_key_on(host, :hkcu, 'SOFTWARE\test_key')
