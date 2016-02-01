@@ -64,14 +64,10 @@ module BeakerWindows
     #   * +:true+ - Suppress the raising a RuntimeError exception.
     #   * +:false+ - Allow RuntimeError to be raised if feature fails to install. (Default)
     #
-    # ==== Returns
-    #
-    # +Array+ - An array of strings representing Windows features.
-    #
     # ==== Raises
     #
     # +RuntimeError+ - Failed to install the feature.
-    # +RuntimeError+ - The host does not have PowerShell 3 or greater available.
+    # +RuntimeError+ - Invalid feature name or incorrect PowerShell version!
     #
     # ==== Example
     #
@@ -102,14 +98,10 @@ module BeakerWindows
     #   * +:true+ - Suppress the raising a RuntimeError exception.
     #   * +:false+ - Allow RuntimeError to be raised if feature fails to be removed. (Default)
     #
-    # ==== Returns
-    #
-    # +Array+ - An array of strings representing Windows features.
-    #
     # ==== Raises
     #
     # +RuntimeError+ - Failed to remove the feature.
-    # +RuntimeError+ - The host does not have PowerShell 3 or greater available.
+    # +RuntimeError+ - Invalid feature name or incorrect PowerShell version!
     #
     # ==== Example
     #
