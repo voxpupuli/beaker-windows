@@ -54,3 +54,58 @@ module BeakerWindows
 
   end
 end
+
+module Beaker
+  module DSL
+    module Assertions
+
+      # Assert that a Windows file/registry path is valid on a host.
+      #
+      # ==== Attributes
+      #
+      # * +host+ - A Windows Beaker host running PowerShell.
+      # * +path+ - A path representing either a file system or registry path.
+      #     If asserting registry paths they must be perpended with the correct hive.
+      # * +path_type+ - The type of path expected.
+      #   * +:any+ - Can be a container or leaf. (Default)
+      #   * +:container+ - Path must be a file system folder or registry key.
+      #   * +:leaf+ - Path must be a file system file or registry value.
+      #
+      # ==== Raises
+      #
+      # +ArgumentError+ - An invalid path type specified.
+      # +Minitest::Assertion+ - Path does not exist or is the wrong type.
+      #
+      # ==== Example
+      #
+      # assert_win_path_on(host, 'C:\Windows')
+      # assert_win_path_on(host, 'C:\Windows\System32', :container)
+      # assert_win_path_on(host, 'C:\Windows\System32\kernel32.dll', :leaf)
+      # assert_win_path_on(host, 'HKLM:\SOFTWARE\Microsoft\Windows NT\CurrentVersion\SystemRoot')
+      def assert_win_path_on(host, path, path_type=:any)
+        # Init
+        ps_cmd = "Test-Path -Path '#{path}' -Type "
+
+        # Expected path type
+        case path_type
+          when :any
+            ps_cmd << 'Any'
+          when :container
+            ps_cmd << 'Container'
+          when :leaf
+            ps_cmd << 'Leaf'
+          else
+            raise(ArgumentError, 'An invalid path type specified!')
+        end
+
+        # Test path
+        result = on(host, exec_ps_cmd(ps_cmd,
+                                      :verify_cmd => true,
+                                      :EncodedCommand => true),
+                    :accept_all_exit_codes => true)
+        assert(0 == result.exit_code, 'Path does not exist or is the wrong type!')
+      end
+
+    end
+  end
+end

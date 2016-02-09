@@ -140,10 +140,6 @@ module Beaker
       #   * +:installed+ - Feature is installed. (Default)
       #   * +:available+ - Feature is not installed.
       #
-      # ==== Returns
-      #
-      # +nil+
-      #
       # ==== Raises
       #
       # +ArgumentError+ - An invalid state was specified.
@@ -181,4 +177,3 @@ module Beaker
     end
   end
 end
-

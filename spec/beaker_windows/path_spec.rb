@@ -87,3 +87,65 @@ describe BeakerWindows::Path do
   end
 
 end
+
+describe Beaker::DSL::Assertions do
+  let(:dummy_class) { Class.new { extend Beaker::DSL::Assertions } }
+  let(:host)        { instance_double(Beaker::Host) }
+  let(:result)      {
+                      x = Beaker::Result.new('host', 'cmd')
+                      x.exit_code = 0
+                      x
+                    }
+  let(:bkr_cmd)     { instance_double(Beaker::Command) }
+  let(:ps_opts)     { {:verify_cmd=>true, :EncodedCommand=>true} }
+  let(:test_path)   { 'c:\cats\and\stuff' }
+
+    describe '#assert_win_path_on' do
+
+    it 'should assert that a valid path exists' do
+      ps_cmd = "Test-Path -Path '#{test_path}' -Type Any"
+
+      expect(dummy_class).to receive(:on).exactly(1).times.and_return(result)
+      expect(dummy_class).to receive(:exec_ps_cmd).with(ps_cmd, ps_opts).and_return(bkr_cmd)
+      expect{ expect(dummy_class.assert_win_path_on(host, test_path)) }.not_to raise_error
+    end
+
+    it 'should assert that a valid directory path exists' do
+      ps_cmd = "Test-Path -Path '#{test_path}' -Type Container"
+
+      expect(dummy_class).to receive(:on).exactly(1).times.and_return(result)
+      expect(dummy_class).to receive(:exec_ps_cmd).with(ps_cmd, ps_opts).and_return(bkr_cmd)
+      expect{ expect(dummy_class.assert_win_path_on(host, test_path, :container)) }.not_to raise_error
+    end
+
+    it 'should assert that a valid file path exists' do
+      ps_cmd = "Test-Path -Path '#{test_path}' -Type Leaf"
+
+      expect(dummy_class).to receive(:on).exactly(1).times.and_return(result)
+      expect(dummy_class).to receive(:exec_ps_cmd).with(ps_cmd, ps_opts).and_return(bkr_cmd)
+      expect{ expect(dummy_class.assert_win_path_on(host, test_path, :leaf)) }.not_to raise_error
+    end
+
+    context 'negative' do
+
+      it 'should raise assert exception if path does not exist' do
+        ps_cmd = "Test-Path -Path '#{test_path}' -Type Any"
+        result.exit_code = 1
+
+        expect(dummy_class).to receive(:on).exactly(1).times.and_return(result)
+        expect(dummy_class).to receive(:exec_ps_cmd).with(ps_cmd, ps_opts).and_return(bkr_cmd)
+        expect{
+          expect(dummy_class.assert_win_path_on(host, test_path))
+        }.to raise_error(Minitest::Assertion)
+      end
+
+      it 'should raise exception if invalid path type is specified' do
+        expect{
+          dummy_class.assert_win_path_on(host, test_path, :bad)
+        }.to raise_error(ArgumentError)
+      end
+
+    end
+
+  end
+end
