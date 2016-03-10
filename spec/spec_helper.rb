@@ -3,7 +3,7 @@ require 'rspec'
 
 SimpleCov.start
 
-require 'beaker_windows'
+require 'beaker-windows'
 
 RSpec.configure do |c|
 
