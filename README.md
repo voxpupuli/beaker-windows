@@ -6,7 +6,7 @@ Beaker helper library for testing on Windows.
 
 Add this line to your application's Gemfile:
 
-    gem 'beaker_windows'
+    gem 'beaker-windows'
 
 And then execute:
 
@@ -14,7 +14,7 @@ And then execute:
 
 Or install it yourself as:
 
-    $ gem install beaker_windows
+    $ gem install beaker-windows
 
 ## Methods
 
