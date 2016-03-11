@@ -14,16 +14,4 @@ Gem::Specification.new do |spec|
   spec.license       = 'Apache-2.0'
   spec.files         = Dir['[A-Z]*[^~]'] + Dir['lib/**/*.rb'] + Dir['spec/*']
   spec.test_files    = Dir['spec/*']
-
-  # Development dependencies
-  spec.add_development_dependency 'bundler', '~> 1.6'
-  spec.add_development_dependency 'pry-byebug', '~> 1.2'
-  spec.add_development_dependency 'rake', '~> 10.0'
-  spec.add_development_dependency 'rspec', '~> 3.0'
-  spec.add_development_dependency 'simplecov', '~> 0.11'
-  spec.add_development_dependency 'beaker', '~> 2.32'
-
-  # Documentation dependencies
-  spec.add_development_dependency 'yard', '~> 0'
-  spec.add_development_dependency 'markdown', '~> 0'
 end
