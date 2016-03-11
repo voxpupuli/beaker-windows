@@ -3,5 +3,5 @@ source 'https://rubygems.org'
 #will probably be only available at https://rubygems.delivery.puppetlabs.net
 #TODO: Change this line when it is actually available internally
 
-# Specify your gem's dependencies in beaker_windows.gemspec
+# Specify your gem's dependencies in beaker-windows.gemspec
 gemspec

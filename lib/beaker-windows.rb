@@ -1,5 +1,5 @@
 %w( path powershell registry windows_feature).each do |lib|
-  require "beaker_windows/#{lib}"
+  require "beaker-windows/#{lib}"
 end
 
 module Beaker
