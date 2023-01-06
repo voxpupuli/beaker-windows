@@ -24,5 +24,5 @@ Gem::Specification.new do |spec|
 
   # Documentation dependencies
   spec.add_development_dependency 'yard', '>= 0.9.11'
-  spec.add_development_dependency 'markdown', '~> 0'
+  spec.add_development_dependency 'markdown', '~> 1'
 end
