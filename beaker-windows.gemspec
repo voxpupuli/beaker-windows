@@ -20,7 +20,7 @@ Gem::Specification.new do |spec|
   spec.add_development_dependency 'rake', '~> 13.0'
   spec.add_development_dependency 'rspec', '~> 3.0'
   spec.add_development_dependency 'simplecov', '~> 0.11'
-  spec.add_development_dependency 'beaker', '~> 4.38'
+  spec.add_development_dependency 'beaker', '~> 5.1'
 
   # Documentation dependencies
   spec.add_development_dependency 'yard', '>= 0.9.11'
